@@ -1,4 +1,22 @@
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+const tokenSecret = "key";
+import fs from "fs";
+
 export const signUpController = async (req, res) => {
   const { username, password, email } = req.body;
-  res.status(200).send(`signup success ${username}, ${password}, ${email}`);
+  const resultJson = fs.readFileSync("./db.json", "utf-8");
+  const result = JSON.parse(resultJson);
+  const users = result.users.find((el) => el.email === email);
+  if (users) {
+    res.status(400).send("email burtgeltei bna");
+    return;
+  }
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  result.users.push({ username, email, password: hashedPassword });
+
+  await fs.writeFileSync("./db.json", JSON.stringify(result), "utf-8");
+
+  res.status(200).send(result.users);
 };

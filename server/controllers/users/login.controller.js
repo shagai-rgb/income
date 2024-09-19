@@ -26,5 +26,5 @@ export const loginController = async (req, res) => {
     expiresIn: "5m",
   });
 
-  res.status(200).send({ success, user });
+  res.status(200).send({ massage: success, user, token });
 };

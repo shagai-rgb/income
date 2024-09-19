@@ -1,12 +1,14 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-const tokenSecret = "key";
 import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
+const tokenSecret = "key";
 
 export const signUpController = async (req, res) => {
   const { username, password, email } = req.body;
   const resultJson = fs.readFileSync("./db.json", "utf-8");
   const result = JSON.parse(resultJson);
+  const userId = uuidv4();
   const users = result.users.find((el) => el.email === email);
   if (users) {
     res.status(400).send("email burtgeltei bna");
@@ -14,7 +16,7 @@ export const signUpController = async (req, res) => {
   }
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  result.users.push({ username, email, password: hashedPassword });
+  result.users.push({ userId, username, email, password: hashedPassword });
 
   await fs.writeFileSync("./db.json", JSON.stringify(result), "utf-8");
 

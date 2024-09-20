@@ -11,7 +11,7 @@ const Login = () => {
 
   const { push } = useRouter();
   if (isLoggedIn) {
-    push("/");
+    push("/user");
   }
 
   const [error, setError] = useState("");
@@ -36,7 +36,7 @@ const Login = () => {
       try {
         await loginHandler(email, password);
         setError("");
-        push("/");
+        push("/user");
       } catch (error) {
         setError(error.message);
       }

@@ -42,7 +42,7 @@ export const UserProvider = ({ children }) => {
     } else {
       setIsLoggedIn(false);
       setLoginLoading(false);
-      router.push("/user/login");
+      // router.push("/user/login");
     }
   }, []);
 

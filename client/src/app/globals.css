@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.steps .step:after {
+  width: 24px;
+  height: 24px;
+}
+
+.steps .step-primary:after {
+  background-color: #0166ff;
+}
+.steps .step-primary + .step-primary:before {
+  background-color: #0166ff;
+}

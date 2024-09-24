@@ -1,11 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
-const StepSelect = () => {
+const StepSelect = ({ optionHnadler }) => {
   return (
     <div className="w-[384px] flex flex-col items-center mt-4">
       <div className="text-2xl font-semibold mt-4">Select base currency</div>
-      <select className="select select-bordered w-full h-[64px] font-semibold text-base text-[Roboto] mt-6 bg-[#F3F4F6]">
+      <select
+        onChange={(e) => {
+          optionHnadler(e);
+        }}
+        className="select select-bordered w-full h-[64px] font-semibold text-base text-[Roboto] mt-6 bg-[#F3F4F6]"
+      >
         <option>MNT - Mongolian Tugrik</option>
         <option>USD - USA Dollar</option>
         <option>EUR - EU Dollar</option>

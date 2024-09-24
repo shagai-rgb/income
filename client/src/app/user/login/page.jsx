@@ -8,11 +8,7 @@ import { userUser } from "@/provider/UserProvider";
 
 const Login = () => {
   const { loginHandler, isLoggedIn, loginLoading } = userUser();
-
   const { push } = useRouter();
-  if (isLoggedIn) {
-    push("/user");
-  }
 
   const [error, setError] = useState("");
   const [userinput, setUserinput] = useState({
@@ -44,6 +40,11 @@ const Login = () => {
       setError("invalid inputs");
     }
   };
+
+  if (isLoggedIn) {
+    push("/user");
+    return;
+  }
 
   if (loginLoading) {
     return <Loader />;

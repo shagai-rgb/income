@@ -1,8 +1,7 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
-const tokenSecret = "key";
 
 export const signUpController = async (req, res) => {
   const { username, password, email } = req.body;

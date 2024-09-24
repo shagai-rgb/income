@@ -12,7 +12,8 @@ const SignUp = () => {
   const { isLoggedIn, loginLoading } = userUser();
 
   if (isLoggedIn) {
-    push("/");
+    push("/user");
+    return;
   }
 
   const [error, setError] = useState("");
@@ -49,7 +50,6 @@ const SignUp = () => {
             "http://localhost:8000/api/user/signup",
             rest
           );
-          console.log(result.data);
           setError("");
           push("/user/login");
         } catch (error) {

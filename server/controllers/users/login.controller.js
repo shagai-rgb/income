@@ -1,7 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-const tokenSecret = "key";
+import env from "dotenv";
 import fs from "fs";
+
+env.config();
 
 export const loginController = async (req, res) => {
   const { password, email } = req.body;
@@ -22,8 +24,8 @@ export const loginController = async (req, res) => {
     return;
   }
 
-  const token = jwt.sign({ username: user.username }, tokenSecret, {
-    expiresIn: "5m",
+  const token = jwt.sign({ userId: user.userId }, process.env.SECRET, {
+    expiresIn: "1d",
   });
 
   res.status(200).send({ massage: success, user, token });

@@ -1,11 +1,24 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Steps } from "./steps/Steps";
 import StepSelect from "./steps/StepSelect";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { userUser } from "@/provider/UserProvider";
 
-export const Step3 = () => {
+export const Step3 = ({ dataBalance, dataCurrency }) => {
+  const { token } = userUser();
   const { push } = useRouter();
-  const goHome = () => {
+
+  const goHome = async () => {
+    const result = await axios.post(
+      "http://localhost:8000/api/user",
+      {
+        balance: dataBalance,
+        currency: dataCurrency,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     push("/");
   };
   return (

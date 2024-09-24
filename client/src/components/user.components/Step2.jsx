@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Steps } from "./steps/Steps";
 
-export const Step2 = ({ stepper }) => {
+export const Step2 = ({ stepper, balanceHandler }) => {
+  const [data, setData] = useState("");
   return (
     <div className="flex flex-col items-center">
       <Steps step2={true} step3={false} />
@@ -11,6 +13,9 @@ export const Step2 = ({ stepper }) => {
           Set up your cash Balance
         </div>
         <input
+          onChange={(e) => {
+            setData(e.target.value);
+          }}
           type="number"
           placeholder="Balance"
           className="input input-bordered w-full mt-6 bg-[#F3F4F6]"
@@ -22,7 +27,10 @@ export const Step2 = ({ stepper }) => {
         </div>
         <button
           onClick={() => {
-            stepper();
+            if (data !== "") {
+              stepper();
+              balanceHandler(data);
+            }
           }}
           className="btn btn-primary text-xl w-[384px] font-normal bg-[#0166FF] hover:bg-[#0166FF] mt-[32px] text-white rounded-[20px]"
         >

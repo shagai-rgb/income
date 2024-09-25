@@ -4,9 +4,9 @@ import { Steps } from "@/components/user.components/steps/Steps";
 import StepSelect from "@/components/user.components/steps/StepSelect";
 
 export const Step1 = ({ stepper, currencyHandler }) => {
-  const [data, setData] = useState("mnt");
+  const [data, setData] = useState("MNT");
   const optionHnadler = (e) => {
-    setData(e.target.value);
+    setData(e.target.value.split(" ")[0]);
   };
 
   return (

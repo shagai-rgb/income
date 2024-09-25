@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
   const [loginLoading, setLoginLoading] = useState(true);
   const [token, setToken] = useState("");
   const router = useRouter();
+  const [isWallet, setIsWallet] = useState(false);
 
   const loginHandler = async (email, password) => {
     try {
@@ -45,6 +46,19 @@ export const UserProvider = ({ children }) => {
         setIsLoggedIn(true);
         setToken(token);
         setLoginLoading(false);
+        const wallet = await axios.get(
+          "http://localhost:8000/api/user/checkwallet",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(wallet);
+
+        if (!wallet.data) {
+          router.push("/user");
+        }
       } else {
         window.localStorage.removeItem("token");
         setToken("");

@@ -3,7 +3,6 @@ import fs from "fs";
 export const userWallet = async (req, res) => {
   const { balance, currency, token } = req.body;
   const { userId } = res.locals;
-  console.log(token);
 
   const resultJson = fs.readFileSync("./db.json", "utf-8");
   const result = JSON.parse(resultJson);

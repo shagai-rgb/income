@@ -51,7 +51,6 @@ export const IncomeBar = () => {
           }}
           width={16}
           height={162}
-          scale
         />
       </div>
     </div>

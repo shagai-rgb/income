@@ -14,6 +14,7 @@ export const authMiddleware = async (req, res, next) => {
       return;
     } else {
       res.locals.userId = suc.userId;
+      console.log(suc.userId);
 
       next();
       return;

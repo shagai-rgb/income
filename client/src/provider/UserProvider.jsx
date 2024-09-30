@@ -37,37 +37,43 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
-    const checkToken = async () => {
-      const result = await axios(
-        `http://localhost:8000/api/user/checktoken/${token}`
-      );
-      if (result.data) {
-        setIsLoggedIn(true);
-        setToken(token);
-        setLoginLoading(false);
-        const wallet = await axios.get(
-          "http://localhost:8000/api/user/checkwallet",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+    if (token) {
+      const checkToken = async () => {
+        const result = await axios(
+          `http://localhost:8000/api/user/checktoken/${token}`
         );
-        console.log(wallet);
+        if (result.data) {
+          setIsLoggedIn(true);
+          setToken(token);
+          setLoginLoading(false);
+          const wallet = await axios.get(
+            "http://localhost:8000/api/user/checkwallet",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
-        if (!wallet.data) {
-          router.push("/user");
+          if (!wallet.data) {
+            router.push("/user");
+          }
+        } else {
+          window.localStorage.removeItem("token");
+          setToken("");
+          setIsLoggedIn(false);
+          setLoginLoading(false);
+          router.push("/user/login");
         }
-      } else {
-        window.localStorage.removeItem("token");
-        setToken("");
-        setIsLoggedIn(false);
-        setLoginLoading(false);
-        router.push("/user/login");
-      }
-    };
-    checkToken();
+      };
+      checkToken();
+    } else {
+      window.localStorage.removeItem("token");
+      setToken("");
+      setIsLoggedIn(false);
+      setLoginLoading(false);
+      router.push("/user/login");
+    }
   }, []);
 
   return (

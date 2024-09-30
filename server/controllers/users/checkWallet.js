@@ -2,17 +2,14 @@ import fs from "fs";
 
 export const checkWallet = async (req, res) => {
   const { userId } = res.locals;
+  console.log(userId);
 
-  const resultJson = fs.readFileSync("./db.json", "utf-8");
-  const result = JSON.parse(resultJson);
+  const user = await sql(`SELECT * FROM users WHERE useid='${userId}'`);
 
-  const { users } = result;
-  const user = users.find((el) => el.userId == userId);
+  // if (!user.wallet) {
+  //   res.status(200).send(false);
+  //   return;
+  // }
 
-  if (!user.wallet) {
-    res.status(200).send(false);
-    return;
-  }
-
-  res.status(200).send(true);
+  res.status(200).send(user);
 };

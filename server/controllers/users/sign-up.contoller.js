@@ -1,23 +1,22 @@
 import bcrypt from "bcryptjs";
-
-import fs from "fs";
+import { sql } from "../../DATABESE/index.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const signUpController = async (req, res) => {
   const { username, password, email } = req.body;
-  const resultJson = fs.readFileSync("./db.json", "utf-8");
-  const result = JSON.parse(resultJson);
-  const userId = uuidv4();
-  const users = result.users.find((el) => el.email === email);
-  if (users) {
-    res.status(400).send("email burtgeltei bna");
+
+  const user = await sql`SELECT * FROM users WHERE email=${email}`;
+
+  if (user.length) {
+    res.status(401).send("email burtgeltei bna");
     return;
   }
+
+  const userId = uuidv4();
+  const createdAt = new Date();
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  result.users.push({ userId, username, email, password: hashedPassword });
+  await sql`INSERT INTO users(useid, username, email, password, createdAt) VALUES(${userId}, ${username}, ${email}, ${hashedPassword}, ${createdAt})`;
 
-  await fs.writeFileSync("./db.json", JSON.stringify(result), "utf-8");
-
-  res.status(200).send(result.users);
+  res.status(200).send("success");
 };

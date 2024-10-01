@@ -22,16 +22,26 @@ export const ExpenseChart = () => {
   //   };
   //   getdata();
   // }, []);
-  const medal = [10, 20, 30, 40, 50];
-  const contryname = [`Bills`, "Food ", "Shopping", "Insurance"];
+  const medal = [10000, 20000, 3000, 40000, 40000];
+  const contryname = [`Bills`, "Food ", "Shopping", "Insurance", "Clothing"];
+  const calculatePercentages = (medal) => {
+    const total = medal.reduce((acc, number) => acc + number, 0);
+
+    if (total === 0) {
+      return medal.map(() => 0); // To handle edge case when the total is 0
+    }
+
+    return medal.map((number) => (number / total) * 100);
+  };
+  const percentages = calculatePercentages(medal);
   return (
     <div className="w-[588px] h-[284px] bg-white rounded-xl flex flex-col">
       <div className=" h-[56px] border-b items-center flex pl-6 gap-2 border-[#E2E8F0]">
         <div className="font-medium text-base">Income - Expense</div>
       </div>
-      <div className="flex flex-col gap-4 px-6 py-5 h-[226px] w-[588px]">
+      <div className="flex gap-4 px-6 py-5 h-[226px] w-[588px] relative">
         <Chart
-          className="flex justify-start items-start"
+          className="flex justify-start z-10 items-start"
           type="donut"
           width={540}
           height={170}
@@ -55,7 +65,7 @@ export const ExpenseChart = () => {
               },
               itemMargin: {
                 horizontal: 10,
-                vertical: 10,
+                vertical: 4,
               },
             },
 
@@ -86,6 +96,20 @@ export const ExpenseChart = () => {
             },
           }}
         />
+        <div className="flex justify-between absolute top-[46px] z-0 left-[380px]">
+          <div className="flex flex-col w-[100px] tems-end">
+            {medal.map((el) => {
+              return <div className="font-normal h-6 text-sm">{el}₮</div>;
+            })}
+          </div>
+          <div className="flex flex-col items-end">
+            {percentages.map((el) => {
+              return (
+                <div className="font-normal h-6 text-sm">{Math.floor(el)}%</div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

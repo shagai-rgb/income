@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
-import fs from "fs";
 import { sql } from "../../DATABESE/index.js";
 
 env.config();

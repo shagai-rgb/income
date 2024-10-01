@@ -5,7 +5,6 @@ import { Step1 } from "@/components/user.components/Step1";
 import { Step2 } from "@/components/user.components/Step2";
 import { Step3 } from "@/components/user.components/Step3";
 import React, { useEffect, useState } from "react";
-import { userUser } from "@/provider/UserProvider";
 import { Loader } from "@/components/user.components/Loader";
 
 const Confirm = () => {

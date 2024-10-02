@@ -36,7 +36,8 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = window.localStorage.getItem("token");
+
     if (token) {
       const checkToken = async () => {
         const result = await axios(

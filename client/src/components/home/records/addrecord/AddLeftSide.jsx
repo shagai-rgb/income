@@ -1,0 +1,79 @@
+"use client";
+
+import { useState } from "react";
+
+export const AddLeftSide = () => {
+  const [expense, setExpense] = useState(true);
+  const incomeBtn = () => {
+    setExpense(false);
+  };
+  const expenseBtn = () => {
+    setExpense(true);
+  };
+  return (
+    <div className="flex w-[444px] flex-col gap-5 p-6">
+      <div className="bg-[#F3F4F6] rounded-full w-[348px] h-10 items-center justify-between flex">
+        <div
+          onClick={() => {
+            expenseBtn();
+          }}
+          className={`w-[172px] h-10 ${
+            expense ? "bg-[#0166FF] text-white " : ""
+          } cursor-pointer rounded-full flex items-center justify-center`}
+        >
+          Expense
+        </div>
+        <div
+          onClick={() => {
+            incomeBtn();
+          }}
+          className={`w-[172px] h-10 ${
+            !expense ? "bg-[#16A34A] text-white " : ""
+          } cursor-pointer rounded-full flex items-center justify-center`}
+        >
+          Income
+        </div>
+      </div>
+      <div className="flex flex-col gap-5 w-[348px] h-[78px] ">
+        <div className="flex flex-col bg-[#F3F4F6] rounded-lg border border-[#D1D5DB] py-3 px-4">
+          <div className="font-normal text-base">Amount</div>
+          <input
+            type="number"
+            placeholder="₮ 000.00"
+            className="input input-ghost w-full max-w-xs bg-[#F3F4F6] h-7"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="font-normal text-base">Category</div>
+          <select className="select select-bordered w-full rounded-lg bg-[#F3F4F6] border border-[#D1D5DB]">
+            <option disabled selected>
+              choose
+            </option>
+            <option>Food & Drinks</option>
+            <option>Shopping</option>
+          </select>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-2">
+            <div className="font-normal text-base">Date</div>
+            <div className="flex">
+              <input
+                type="datetime-local"
+                className="w-[220px] h-12 py-3 px-4 bg-[#F9FAFB] border border-[#D1D5DB] rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+        <button
+          className={`btn btn-primary h-12 w-full min-h-0 ${
+            expense
+              ? "bg-[#0166FF] hover:bg-[#0166FF]"
+              : "bg-[#16A34A] hover:bg-[#16A34A] border-[#16A34A] hover:border-[#16A34A]"
+          }  text-base font-extralight  text-white rounded-[20px]`}
+        >
+          add record
+        </button>
+      </div>
+    </div>
+  );
+};

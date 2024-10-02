@@ -10,7 +10,8 @@ export const loginController = async (req, res) => {
   const success = true;
 
   const user = await sql(`SELECT * FROM users WHERE email='${email}'`);
-  if (!user) {
+
+  if (user.length == 0) {
     success == false;
     res.status(400).send("Username or password wrong");
     return;

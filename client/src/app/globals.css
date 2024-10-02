@@ -13,3 +13,12 @@
 .steps .step-primary + .step-primary:before {
   background-color: #0166ff;
 }
+.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root {
+  z-index: 1500;
+}
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

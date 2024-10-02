@@ -1,4 +1,25 @@
+"use client";
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export const Card = () => {
+  const [balance, setBalance] = useState();
+  const token = window.localStorage.getItem("token");
+  const balanceHandler = async () => {
+    const { data } = await axios.get(`http://localhost:8000/api/user/balance`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setBalance(data);
+  };
+  useEffect(() => {
+    if (token) {
+      balanceHandler();
+    }
+  });
+
   return (
     <div className="w-[384px] h-[216px] relative rounded-[18px] bg-[#0166FF]">
       <img
@@ -39,7 +60,7 @@ export const Card = () => {
         <div className="flex justify-between items-end">
           <div className="w-[108px] h-56px] flex flex-col text-white">
             <div className="font-normal text-base opacity-50">Cash</div>
-            <div className="font-medium text-2xl">10,000,00</div>
+            <div className="font-medium text-2xl">{balance}</div>
           </div>
           <svg
             width="40"

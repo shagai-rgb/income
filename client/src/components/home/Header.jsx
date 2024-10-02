@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "./Button";
+import { useRouter } from "next/navigation";
 
-export const Header = ({ buttonBoard, buttonRecords }) => {
+export const Header = ({ buttonBoard, buttonRecords, handleOpen }) => {
   const [dash, setDash] = useState(true);
   const buttonDash = () => {
     setDash(true);
@@ -15,6 +16,11 @@ export const Header = ({ buttonBoard, buttonRecords }) => {
   } else {
     buttonRecords();
   }
+  const logOutHandle = () => {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <div className="w-screen bg-white h-[72px] flex justify-center">
       <div className="w-[1200px] flex items-center justify-between ">
@@ -48,7 +54,12 @@ export const Header = ({ buttonBoard, buttonRecords }) => {
         </div>
         <div className="flex gap-6 font- items-center">
           <div className="w-[99px] h-[32px]">
-            <Button text={"+ Record"} />
+            <Button
+              onClick={() => {
+                handleOpen(), buttonRecord();
+              }}
+              text={"+ Record"}
+            />
           </div>
 
           <div className="dropdown dropdown-end">
@@ -77,7 +88,11 @@ export const Header = ({ buttonBoard, buttonRecords }) => {
               <li>
                 <a>Settings</a>
               </li>
-              <li>
+              <li
+                onClick={() => {
+                  logOutHandle();
+                }}
+              >
                 <a>Logout</a>
               </li>
             </ul>

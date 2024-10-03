@@ -8,17 +8,13 @@ import { IoMdEye } from "react-icons/io";
 import { AddRecord } from "./AddRecord";
 export const LeftSide = ({ open, handleOpen, handleClose }) => {
   const category = [
-    "Food & Drinks",
+    "Home",
     "Shopping",
-    "Housing",
-    "Transportation",
-    "Vehicle",
-    "Life & Entertainment",
-    "Communication, PC",
-    "Financial expenses",
-    "Investments",
+    "Food",
+    "Drinks",
+    "Taxi",
+    "Gift",
     "Income",
-    "Others",
   ];
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-export const AddRightSide = () => {
+export const AddRightSide = ({ handleChange }) => {
   return (
     <div className="flex w-[444px] flex-col gap-5 p-6">
       <div className="flex flex-col gap-2 ">
@@ -14,7 +14,8 @@ export const AddRightSide = () => {
         <div>Note</div>
 
         <textarea
-          name="payee"
+          onChange={handleChange}
+          name="note"
           id=""
           type="text"
           className="rounded-lg bg-[#F3F4F6] border border-[#D1D5DB] w-[348px] resize-none h-[270px] p-4"

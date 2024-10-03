@@ -3,6 +3,7 @@ import cors from "cors";
 import env from "dotenv";
 import userRouter from "./routers/user.router.js";
 import categoryRouter from "./routers/category.router.js";
+import transactionRouter from "./routers/transaction.router.js";
 
 env.config();
 const app = express();
@@ -13,5 +14,6 @@ app.use(cors());
 
 app.use("/api", userRouter);
 app.use("/api", categoryRouter);
+app.use("/api", transactionRouter);
 
 app.listen(port, console.log(`http:localhost${port}`));

@@ -24,22 +24,39 @@ export const AddRecord = ({ handleClose }) => {
   };
 
   const handleSubmit = async () => {
+    console.log(record);
+
     if (Object.values(record).some((element) => element === "")) {
       alert("input invalid");
       return;
     }
-    const token = window.localStorage.getItem("token");
-    const result = await axios.post(
-      "http://localhost:8000/api/user/expense",
-      record,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    handleClose();
-    console.log(result.data);
+    if (isExpense) {
+      const token = window.localStorage.getItem("token");
+      const result = await axios.post(
+        "http://localhost:8000/api/user/expense",
+        record,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      handleClose();
+      console.log(result.data);
+    } else {
+      const token = window.localStorage.getItem("token");
+      const result = await axios.post(
+        "http://localhost:8000/api/user/income",
+        record,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      handleClose();
+      console.log(result.data);
+    }
   };
   return (
     <div className="modal-box z-30 p-0   w-[792px] max-w-[792px] max-h-[520px] h-[520px]">

@@ -6,6 +6,9 @@ import { Button } from "../Button";
 import { IoEyeOff, IoEyeOffSharp } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { AddRecord } from "./AddRecord";
+
+import { useState } from "react";
+
 export const LeftSide = ({ open, handleOpen, handleClose }) => {
   const category = [
     "Home",
@@ -16,6 +19,28 @@ export const LeftSide = ({ open, handleOpen, handleClose }) => {
     "Gift",
     "Income",
   ];
+
+  const [all, setAll] = useState(true);
+  const [Income, setIncome] = useState(false);
+  const [expense, setExpense] = useState(false);
+
+  const allBtnHandler = () => {
+    setAll(true);
+    setIncome(false);
+    setExpense(false);
+  };
+
+  const incomeBtnHandler = () => {
+    setAll(false);
+    setIncome(true);
+    setExpense(false);
+  };
+
+  const expenseBtnHandler = () => {
+    setAll(false);
+    setIncome(false);
+    setExpense(true);
+  };
 
   return (
     <div className="flex flex-col items-center w-[282px] bg-[#F9FAFB] rounded-xl border border-[#E5E7EB]">
@@ -48,20 +73,42 @@ export const LeftSide = ({ open, handleOpen, handleClose }) => {
           <div className="flex flex-col text-base font-normal">
             <div className="flex flex-col ml-3">
               <div className="form-control">
-                <label className="label cursor-pointer gap-2 flex justify-start">
-                  <input type="checkbox" className="checkbox w-4 h-4" />
+                <label
+                  onClick={allBtnHandler}
+                  className="label cursor-pointer gap-2 flex justify-start"
+                >
+                  <input
+                    type="radio"
+                    name="radio-10"
+                    className="radio checked:bg-slate-600 w-4 h-4"
+                    defaultChecked
+                  />
                   <span className="label-text">All</span>
                 </label>
               </div>
               <div className="form-control">
-                <label className="label cursor-pointer gap-2 flex justify-start">
-                  <input type="checkbox" className="checkbox w-4 h-4" />
+                <label
+                  onClick={incomeBtnHandler}
+                  className="label cursor-pointer gap-2 flex justify-start"
+                >
+                  <input
+                    type="radio"
+                    name="radio-10"
+                    className="radio checked:bg-slate-600 w-4 h-4"
+                  />
                   <span className="label-text">Income</span>
                 </label>
               </div>
               <div className="form-control">
-                <label className="label cursor-pointer gap-2 flex justify-start">
-                  <input type="checkbox" className="checkbox w-4 h-4" />
+                <label
+                  onClick={expenseBtnHandler}
+                  className="label cursor-pointer gap-2 flex justify-start"
+                >
+                  <input
+                    type="radio"
+                    name="radio-10"
+                    className="radio checked:bg-slate-600 w-4 h-4"
+                  />
                   <span className="label-text">Expense</span>
                 </label>
               </div>

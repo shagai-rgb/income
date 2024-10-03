@@ -2,28 +2,53 @@
 import Chart from "react-apexcharts";
 
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const ExpenseChart = () => {
-  // const [contryname, setCountryname] = useState([]);
-  // const [medal, setMedal] = useState([]);
+  const [contryname, setCountryname] = useState([]);
+  const [medal, setMedal] = useState([]);
 
-  // useEffect(() => {
-  //   const getdata = async () => {
-  //     const countryname = [];
-  //     const getmedal = [];
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
 
-  //     const resData = [10, 20, 30, 40, 50, 60];
-  //     for (let i = 0; i < resData.length; i++) {
-  //       countryname.push(resData[i].country);
-  //       getmedal.push(parseInt(resData[i].medals));
-  //     }
-  //     setCountryname(countryname);
-  //     setMedal(getmedal);
-  //   };
-  //   getdata();
-  // }, []);
-  const medal = [10000, 20000, 3000, 40000, 40000];
-  const contryname = [`Bills`, "Food ", "Shopping", "Insurance", "Clothing"];
+    if (token) {
+      const getdata = async () => {
+        const countryname = [];
+        const getmedal = [];
+
+        const result1 = await axios.get(
+          "http://localhost:8000/api/user/records",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        let isrepeat = false;
+
+        result1.data.map((el) => {
+          if (el.expense) {
+            countryname.map((e, i) => {
+              if (e == el.category) {
+                isrepeat = true;
+                getmedal[i] = getmedal[i] + Number(el.expense);
+              }
+            });
+            if (!isrepeat) {
+              countryname.push(el.category);
+              getmedal.push(Number(el.expense));
+            }
+            isrepeat = false;
+          }
+        });
+        setCountryname(countryname);
+        setMedal(getmedal);
+      };
+      getdata();
+    }
+  }, []);
+
   const calculatePercentages = (medal) => {
     const total = medal.reduce((acc, number) => acc + number, 0);
 

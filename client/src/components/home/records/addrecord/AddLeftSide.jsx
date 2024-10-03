@@ -1,8 +1,5 @@
 "use client";
 
-import axios from "axios";
-import { useState } from "react";
-
 export const AddLeftSide = ({
   isExpense,
   handleExpenseClick,
@@ -62,11 +59,17 @@ export const AddLeftSide = ({
               <option>Gift</option>
             </select>
           ) : (
-            <select className="select select-bordered w-full rounded-lg bg-[#F3F4F6] border border-[#D1D5DB]">
+            <select
+              name="category"
+              onChange={handleChange}
+              className="select select-bordered w-full rounded-lg bg-[#F3F4F6] border border-[#D1D5DB]"
+            >
               <option disabled selected>
                 choose
               </option>
               <option>income</option>
+              <option>investment</option>
+              <option>hustle</option>
             </select>
           )}
         </div>

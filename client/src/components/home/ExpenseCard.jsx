@@ -1,5 +1,32 @@
 "use client";
+
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export const ExpenseCard = () => {
+  const [expense, setExpense] = useState(0);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+
+    if (token) {
+      const totalexpense = async () => {
+        const result1 = await axios.get(
+          "http://localhost:8000/api/user/totalexpense",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setExpense(result1.data);
+      };
+
+      totalexpense();
+    }
+  });
+
   return (
     <div className="w-[384px] h-[216px] bg-white rounded-xl flex flex-col">
       <div className=" h-[56px] border-b items-center flex pl-6 gap-2 border-[#E2E8F0]">
@@ -8,7 +35,7 @@ export const ExpenseCard = () => {
       </div>
       <div className="flex flex-col gap-4 px-6 py-5 h-[226px] w-[588px]">
         <div className="flex flex-col gap-1">
-          <div className="font-semibold text-4xl">-1,200,000 ₮</div>
+          <div className="font-semibold text-4xl">-{expense} ₮</div>
           <div className="text-[#64748B] text-lg font-light">
             Your Income Amount
           </div>

@@ -9,7 +9,14 @@ import { AddRecord } from "./AddRecord";
 
 import { useState } from "react";
 
-export const LeftSide = ({ open, handleOpen, handleClose }) => {
+export const LeftSide = ({
+  open,
+  handleOpen,
+  handleClose,
+  allBtnHandler,
+  incomeBtnHandler,
+  expenseBtnHandler,
+}) => {
   const category = [
     "Home",
     "Shopping",
@@ -19,28 +26,6 @@ export const LeftSide = ({ open, handleOpen, handleClose }) => {
     "Gift",
     "Income",
   ];
-
-  const [all, setAll] = useState(true);
-  const [Income, setIncome] = useState(false);
-  const [expense, setExpense] = useState(false);
-
-  const allBtnHandler = () => {
-    setAll(true);
-    setIncome(false);
-    setExpense(false);
-  };
-
-  const incomeBtnHandler = () => {
-    setAll(false);
-    setIncome(true);
-    setExpense(false);
-  };
-
-  const expenseBtnHandler = () => {
-    setAll(false);
-    setIncome(false);
-    setExpense(true);
-  };
 
   return (
     <div className="flex flex-col items-center w-[282px] bg-[#F9FAFB] rounded-xl border border-[#E5E7EB]">

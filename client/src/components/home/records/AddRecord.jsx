@@ -7,6 +7,7 @@ import axios from "axios";
 
 export const AddRecord = ({ handleClose }) => {
   const [isExpense, setIsExpense] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [record, setRecord] = useState({
     amount: "",
@@ -31,6 +32,7 @@ export const AddRecord = ({ handleClose }) => {
       return;
     }
     if (isExpense) {
+      setLoading(true);
       const token = window.localStorage.getItem("token");
       const result = await axios.post(
         "http://localhost:8000/api/user/expense",
@@ -44,6 +46,7 @@ export const AddRecord = ({ handleClose }) => {
       handleClose();
       console.log(result.data);
     } else {
+      setLoading(true);
       const token = window.localStorage.getItem("token");
       const result = await axios.post(
         "http://localhost:8000/api/user/income",
@@ -78,6 +81,7 @@ export const AddRecord = ({ handleClose }) => {
           handleIncomeClick={handleIncomeClick}
           handleChange={handleChange}
           isExpense={isExpense}
+          loading={loading}
           handleSubmit={handleSubmit}
         />
         <AddRightSide handleChange={handleChange} />

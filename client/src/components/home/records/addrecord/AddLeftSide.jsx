@@ -6,6 +6,7 @@ export const AddLeftSide = ({
   handleIncomeClick,
   handleChange,
   handleSubmit,
+  loading,
 }) => {
   return (
     <div className="flex w-[444px] flex-col gap-5 p-6">
@@ -87,6 +88,7 @@ export const AddLeftSide = ({
           </div>
         </div>
         <button
+          disabled={loading}
           onClick={handleSubmit}
           className={`btn btn-primary h-12 w-full min-h-0 ${
             isExpense
@@ -94,7 +96,7 @@ export const AddLeftSide = ({
               : "bg-[#16A34A] hover:bg-[#16A34A] border-[#16A34A] hover:border-[#16A34A]"
           }  text-base font-extralight  text-white rounded-[20px]`}
         >
-          add record
+          {loading ? "Loading..." : "add record"}
         </button>
       </div>
     </div>

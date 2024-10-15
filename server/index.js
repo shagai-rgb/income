@@ -12,8 +12,8 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", userRouter);
-app.use("/api", categoryRouter);
-app.use("/api", transactionRouter);
+app.use("/", userRouter);
+app.use("/", categoryRouter);
+app.use("/", transactionRouter);
 
 app.listen(port, console.log(`http:localhost${port}`));

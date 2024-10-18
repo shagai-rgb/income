@@ -5,6 +5,26 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 export const RightSide = ({ data, filterHandler }) => {
+  const date = new Date();
+
+  // Get date components
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const day = String(date.getDate()).padStart(2, "0");
+
+  // Get time components
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  // Combine date and time
+  const customDateTimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
+  const words = customDateTimeString.split("T");
+  console.log(words[0]);
+
+  data.map((el) => {
+    console.log(el.date.split("T")[0].split("-"));
+  });
+
   return (
     <div className="mt-2 w-[894px] flex flex-col gap-5">
       <div className="flex justify-between items-center h-12">

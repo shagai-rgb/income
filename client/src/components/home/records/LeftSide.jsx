@@ -7,8 +7,6 @@ import { IoEyeOff, IoEyeOffSharp } from "react-icons/io5";
 import { IoMdEye } from "react-icons/io";
 import { AddRecord } from "./AddRecord";
 
-import { useState } from "react";
-
 export const LeftSide = ({
   open,
   handleOpen,

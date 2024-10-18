@@ -37,7 +37,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-
     if (token) {
       const checkToken = async () => {
         const result = await axios(
@@ -47,18 +46,18 @@ export const UserProvider = ({ children }) => {
           setIsLoggedIn(true);
           setToken(token);
           setLoginLoading(false);
-          const wallet = await axios.get(
-            "http://localhost:8000/api/user/checkwallet",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          // const wallet = await axios.get(
+          //   "http://localhost:8000/api/user/checkwallet",
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${token}`,
+          //     },
+          //   }
+          // );
 
-          if (!wallet.data) {
-            router.push("/user");
-          }
+          // if (!wallet.data) {
+          //   router.push("/user");
+          // }
         } else {
           window.localStorage.removeItem("token");
           setToken("");

@@ -21,7 +21,7 @@ export const RightSide = ({ data, filterHandler }) => {
   const words = customDateTimeString.split("T");
   console.log(words[0]);
 
-  data.map((el) => {
+  data.map((el, index) => {
     console.log(el.date.split("T")[0].split("-"));
   });
 
@@ -51,12 +51,15 @@ export const RightSide = ({ data, filterHandler }) => {
       <div className="flex flex-col gap-3">
         <div className="font-semibold text-base">Today</div>
         <div className="flex flex-col gap-3">
-          {data.map((el) => {
+          {data.map((el, index) => {
             const { category, income, expense, date } = el;
 
             if (income) {
               return (
-                <div className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center">
+                <div
+                  key={index}
+                  className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center"
+                >
                   <div className="flex">
                     <img
                       src={`/category/${category}.png`}
@@ -77,7 +80,10 @@ export const RightSide = ({ data, filterHandler }) => {
               );
             } else {
               return (
-                <div className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center">
+                <div
+                  key={index}
+                  className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center"
+                >
                   <div className="flex">
                     <img
                       src={`/category/${category}.png`}
@@ -106,12 +112,15 @@ export const RightSide = ({ data, filterHandler }) => {
           {data
             .slice(0)
             .reverse()
-            .map((el) => {
+            .map((el, index) => {
               const { category, income, expense, date } = el;
 
               if (income) {
                 return (
-                  <div className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center">
+                  <div
+                    key={index}
+                    className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center"
+                  >
                     <div className="flex">
                       <img
                         src={`/category/${category}.png`}
@@ -132,7 +141,10 @@ export const RightSide = ({ data, filterHandler }) => {
                 );
               } else {
                 return (
-                  <div className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center">
+                  <div
+                    key={index}
+                    className="bg-white h-[64px] rounded-xl px-6 flex justify-between items-center"
+                  >
                     <div className="flex">
                       <img
                         src={`/category/${category}.png`}

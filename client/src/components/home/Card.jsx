@@ -9,7 +9,7 @@ export const Card = () => {
   const token = window.localStorage.getItem("token");
 
   const balanceHandler = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/user/balance`, {
+    const { data } = await axios.get(`https://income-zkgv.onrender.com/user/balance`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -97,7 +97,7 @@ export const Card = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g opacity="0.5">
+          {/* <g opacity="0.5">
             <path
               d="M196.175 41.0872C205.369 51.9725 204.982 69.4448 196.526 89.1273C188.089 108.764 171.703 130.371 149.343 149.257C126.984 168.142 102.941 180.684 82.1689 185.717C61.3492 190.762 44.0584 188.221 34.8643 177.335C25.6702 166.45 26.0572 148.978 34.5132 129.295C42.9497 109.658 59.3361 88.0513 81.6956 69.1657C104.055 50.2801 128.098 37.7387 148.87 32.7056C169.69 27.6609 186.981 30.2019 196.175 41.0872Z"
               stroke="white"
@@ -173,7 +173,7 @@ export const Card = () => {
               stroke="white"
               stroke-width="1.47658"
             />
-          </g>
+          </g> */}
         </svg>
       </div>
     </div>

@@ -9,7 +9,10 @@ export const ExpenseChart = () => {
   const [medal, setMedal] = useState([]);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+    const token =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
+        : null;
 
     if (token) {
       const getdata = async () => {
@@ -17,7 +20,7 @@ export const ExpenseChart = () => {
         const getmedal = [];
 
         const result1 = await axios.get(
-          "http://localhost:8000/api/user/records",
+          "https://income-zkgv.onrender.com/user/records",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -27,7 +30,7 @@ export const ExpenseChart = () => {
 
         let isrepeat = false;
 
-        result1.data.map((el) => {
+        result1.data.map((el, index) => {
           if (el.expense) {
             countryname.map((e, i) => {
               if (e == el.category) {
@@ -123,14 +126,20 @@ export const ExpenseChart = () => {
         />
         <div className="flex justify-between absolute top-[46px] z-0 left-[380px]">
           <div className="flex flex-col w-[100px] tems-end">
-            {medal.map((el) => {
-              return <div className="font-normal h-6 text-sm">{el}₮</div>;
+            {medal.map((el, i) => {
+              return (
+                <div key={i} className="font-normal h-6 text-sm">
+                  {el}₮
+                </div>
+              );
             })}
           </div>
           <div className="flex flex-col items-end">
-            {percentages.map((el) => {
+            {percentages.map((el, i) => {
               return (
-                <div className="font-normal h-6 text-sm">{Math.floor(el)}%</div>
+                <div key={i} className="font-normal h-6 text-sm">
+                  {Math.floor(el)}%
+                </div>
               );
             })}
           </div>

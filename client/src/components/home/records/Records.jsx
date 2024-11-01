@@ -81,7 +81,7 @@ export const Records = ({ open, handleOpen, handleClose }) => {
     if (token) {
       const records = async () => {
         const result1 = await axios.get(
-          "http://localhost:8000/api/user/records",
+          "https://income-zkgv.onrender.com/user/records",
           {
             headers: {
               Authorization: `Bearer ${token}`,

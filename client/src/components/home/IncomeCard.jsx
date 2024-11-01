@@ -12,7 +12,7 @@ export const IncomeCard = () => {
     if (token) {
       const totalincome = async () => {
         const result1 = await axios.get(
-          "http://localhost:8000/api/user/totalincome",
+          "https://income-zkgv.onrender.com/user/totalincome",
           {
             headers: {
               Authorization: `Bearer ${token}`,

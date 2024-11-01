@@ -11,7 +11,7 @@ export const Dashboard = () => {
   return (
     <div className="flex flex-col mt-8 mb-10 gap-6">
       <div className="max-w-[1200px] flex gap-6">
-        <Card />
+        {/* <Card /> */}
         <IncomeCard />
         <ExpenseCard />
       </div>

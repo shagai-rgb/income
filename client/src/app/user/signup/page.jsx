@@ -46,11 +46,12 @@ const SignUp = () => {
       if (userinput.password === userinput.repassword) {
         try {
           const { repassword, ...rest } = userinput;
-          await axios.post("http://localhost:8000/api/user/signup", rest);
+          await axios.post("https://income-zkgv.onrender.com/user/signup", rest);
 
           setError("");
           push("/user/login");
         } catch (error) {
+          
           setError(error.response.data);
         }
       } else {

@@ -12,7 +12,7 @@ export const LastRecords = () => {
     if (token) {
       const records = async () => {
         const result1 = await axios.get(
-          "http://localhost:8000/api/user/records",
+          "https://income-zkgv.onrender.com/user/records",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export const LastRecords = () => {
 
           if (el.income) {
             return (
-              <div className="h-20 mx-6 flex items-center justify-between">
+              <div key={i} className="h-20 mx-6 flex items-center justify-between">
                 <div className="gap-4 flex items-center">
                   <img
                     src={`/category/${el.category}.png`}
@@ -62,7 +62,7 @@ export const LastRecords = () => {
             );
           } else {
             return (
-              <div className="h-20 mx-6 flex items-center justify-between">
+              <div key={i} className="h-20 mx-6 flex items-center justify-between">
                 <div className="gap-4 flex items-center">
                   <img
                     src={`/category/${el.category}.png`}

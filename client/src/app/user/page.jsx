@@ -31,7 +31,7 @@ const Confirm = () => {
     const refresh = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:8000/api/user/checkwallet",
+          "https://income-zkgv.onrender.com/user/checkwallet",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -40,13 +40,18 @@ const Confirm = () => {
         );
 
         if (result.data) {
+          
           router.push("/");
           return;
         }
 
         setLoading(false);
       } catch (err) {
+        console.log(err);
+        
         setLoading(false);
+        console.log(err);
+        
         if (err.message.includes("jwt")) {
           window.localStorage.removeItem("token");
         }

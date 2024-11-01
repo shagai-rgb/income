@@ -3,12 +3,13 @@ import { UserHead } from "@/components/user.components/UserHead";
 import { Loader } from "@/components/user.components/Loader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userUser } from "@/provider/UserProvider";
 
 const Login = () => {
   const { loginHandler, isLoggedIn, loginLoading } = userUser();
-  const { push } = useRouter();
+  // const { push } = useRouter();
+  const router = useRouter();
 
   const [error, setError] = useState("");
   const [userinput, setUserinput] = useState({
@@ -40,11 +41,11 @@ const Login = () => {
       setError("invalid inputs");
     }
   };
-
-  if (isLoggedIn) {
-    push("/user");
-    return;
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/user");
+    }
+  }, [isLoggedIn, router]);
 
   if (loginLoading) {
     return <Loader />;

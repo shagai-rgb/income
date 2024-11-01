@@ -12,7 +12,7 @@ export const Step3 = ({ dataBalance, dataCurrency }) => {
 
   const goHome = async () => {
     const result = await axios.post(
-      "http://localhost:8000/api/user",
+      "https://income-zkgv.onrender.com/user",
       {
         balance: dataBalance,
         currency: dataCurrency,

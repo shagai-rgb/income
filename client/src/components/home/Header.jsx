@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
 
@@ -11,11 +11,15 @@ export const Header = ({ buttonBoard, buttonRecords, handleOpen }) => {
   const buttonRecord = () => {
     setDash(false);
   };
-  if (dash) {
-    buttonBoard();
-  } else {
-    buttonRecords();
-  }
+
+  useEffect(() => {
+    if (dash) {
+      buttonBoard();
+    } else {
+      buttonRecords();
+    }
+  }, [dash, buttonBoard, buttonRecords]);
+
   const logOutHandle = () => {
     window.localStorage.removeItem("token");
     window.location.reload();

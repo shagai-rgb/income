@@ -21,7 +21,7 @@ export const HomePage = () => {
 
   return (
     <div className="w-full relative flex flex-col items-center bg-[#F3F4F6]">
-      {/* <Header
+      <Header
         handleOpen={() => {
           handleOpen();
         }}
@@ -31,9 +31,9 @@ export const HomePage = () => {
         buttonRecords={() => {
           buttonRecords();
         }}
-      /> */}
+      />
 
-      {/* {dash ? (
+      {dash ? (
         <Dashboard />
       ) : (
         <Records
@@ -45,7 +45,7 @@ export const HomePage = () => {
             handleClose();
           }}
         />
-      )} */}
+      )}
     </div>
   );
 };
